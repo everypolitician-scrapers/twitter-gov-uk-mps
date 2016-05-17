@@ -20,7 +20,7 @@ twitter.list_members('gov', 'uk-mps').each do |person|
     id: person.id,
     name: person.name,
     twitter: person.screen_name,
-    image: person.profile_image_url_https(:original).to_s,
   }
+  data[:image] = person.profile_image_url_https(:original).to_s unless person.default_profile_image?
   ScraperWiki.save_sqlite([:id], data)
 end
